@@ -101,7 +101,7 @@ One thing to note is that the Kubernetes Pod objects has more settings than defi
 
 ## kubectl describe
 
-This command provices a formatted multi-line overview of an object. Here's an example
+This command provides a formatted multi-line overview of an object. Here's an example
 
 ```
 kubectl describe pods hello-pod
@@ -156,7 +156,7 @@ kubectl exec -it test-pod -- sh
 ```
 Once inside the container you are free to explore with the usual linux CLI commands
 
-The `-it` flag stands for interactive and allows you to connect the STNDIN and STDOUT of your terminal to the one inside the first container in the pod.
+The `-it` flag stands for interactive and allows you to connect the STDDIN and STDOUT of your terminal to the one inside the first container in the pod.
 
 If running a multi-container Pod, you will need to pass the `--container flag` and give the name of the container that you wnt to exec into. 
 
