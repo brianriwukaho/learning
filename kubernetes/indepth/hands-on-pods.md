@@ -1,4 +1,7 @@
 # Interacting with Pods
+
+Below is an example manifest describing a singular Kubernetes Pod
+
 ```
 apiVersion: v1
 kind: Pod
