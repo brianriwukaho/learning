@@ -224,4 +224,6 @@ The way this can be achieved is to make a new Deployment and update one of the v
 
 The Service's label selector can be updated to match the new ReplicaSet and all traffic will then be forced to point to the new application with no downtime.
 
-If we want to easily roll back we can update the Service yaml with the previous version which will point back to the old Pods
+If we want to easily roll back we can update the Service yaml with the previous version which will point back to the old Pods. The old version still existed in this case, but no traffic was being routed to it.
+
+This functionality can be used for all kinds of deploys - blue-greens, canary, etc
