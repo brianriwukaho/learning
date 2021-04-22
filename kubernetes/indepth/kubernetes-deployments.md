@@ -229,6 +229,22 @@ Which will output:
 
 ```
 NAME                  DESIRED  CURRENT  READY  AGE
-hello-deploy-6bc8...  10       10       10     10m
-hello-deploy-7bbd...  0        0        0      52m
+test-deploy-6bc8...  10       10       10     10m
+test-deploy-7bbd...  0        0        0      52m
 ```
+
+The ReplicaSet from the previous Deployment can be seen. It may also be worth using `kubectl describe rs` on the old ReplicaSet to verify that its configuration still exists.
+
+The following `kubectl rollout` command can be used to rollback and application to the specified revision. This is an imperative operation and not recommended, but can make for quick rollbacks.
+
+```
+kubectl rollout undo deployment test-deploy --to-revision=1
+```
+
+Which will output:
+
+```
+deployment.apps "test-deploy" rolled back
+```
+
+The rollback operation is not instantaneous and follows the same rules set out in the strategy section of the Deployment yaml.
