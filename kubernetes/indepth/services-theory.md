@@ -86,6 +86,24 @@ LoadBalancer Services integrate with load balancers from cloud providers. They b
 
 ExternalName services route traffic to systems outside of your Kubernetes cluster.
 
-## Service Discovery
+# Service Discovery
 
-Kubernetes Service discovery can be implemented via DNS (preffered) or Environment Variables (don't do this)
+Kubernetes Service discovery can be implemented via DNS (preferred) or Environment Variables (don't do this).
+
+## DNS
+
+DNS-based Service discovery requires the DNS cluster-add-on (fancy name for the native K8s service). Behind the scenes it implements: 
+
+* Control plane pods running a DNS service
+* A Service object, called `kube-dns` that sits in front of the Pods
+* Kubelets program every container with the knowledge of DNS (via `/etc/resolv.conf`)
+
+The DNS add-on constantly watches the API server for new Services and automatically registers them in the DNS. As a result, every Service gets a DNS name that is resolvable across the entire cluster.
+
+## Environment Variables
+
+Every Pod gets a set of environment variables that resolve every Service currently on the cluster. 
+
+A major problem with environment variables is that they're only inserted into Pods when the Pod is initially created. This means that Pods have no way of learning about new Services added to the cluster __after__ the Pod itself is created. This is why DNS is the preffered method
+
+tl:dr - Pods will not be aware of new services made after their creation.
